@@ -19,6 +19,9 @@ private Integer Visitid;
 private tbl_user user;
 private Date  Visitdate;
 private String VisitIP;
+
+
+
 public Integer getVisitid() {
 	return Visitid;
 }

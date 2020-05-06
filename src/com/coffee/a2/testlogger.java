@@ -20,6 +20,7 @@ public class testlogger {
 	 private static final Logger LOG = Logger.getLogger(testlogger.class);  
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
+		
 		 LOG.info("this is log");
 	}
 

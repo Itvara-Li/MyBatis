@@ -15,6 +15,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.apache.log4j.Logger;
 
 import com.coffee.entity.tbl_user;
 
@@ -29,6 +30,7 @@ public class hello {
 	/**
 	 * @param args
 	 */
+	 private static final Logger LOG = Logger.getLogger(com.coffee.a2.hello.class);  
 	public static void main(String[] args) {
 		String resource = "mybatis-config.xml";
 		Reader reader = null;
@@ -43,7 +45,8 @@ public class hello {
 				.build(reader);
 		session = sqlMapper.openSession();
 		tbl_user temp = session.selectOne("findById", 2);
-		System.out.println(temp.getName());
+	LOG.error(temp.getName());
+		//System.out.println(temp.getName());
 		session.close();
 
 	}

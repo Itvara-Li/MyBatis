@@ -31,7 +31,7 @@ public class GetStudent extends HttpServlet
 			if(row != null)
 			{
 				resp.setCharacterEncoding("UTF-8");
-				resp.setContentType("text/plain");
+				resp.setContentType("text/html");
 				resp.getWriter().print( result.toJson(row));
 				
 			}

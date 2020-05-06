@@ -7,6 +7,8 @@
 		insert into tbl_address(user_id,city,country)
 		values(#{user.id},#{city},#{country})
 	</insert>
+	
+	
 	<!-- 普通连接 -->
 	<resultMap id="UAMap" type="Address">
 		<id property="id" column="id" />
@@ -24,9 +26,22 @@
 		select * from
 		tbl_address inner join tbl_user
 		on tbl_user.id=tbl_address.user_id
-
 	</select>
-
+	
+	<!-- 调用其他函数 -->
+	<resultMap id="UAMapBySubMap" type="Address">
+		<id property="id" column="id" />
+		<result property="city" column="city" />
+		<result property="country" column="country" />
+		<result property="money" column="money" />
+		<association property="user" column="user_id" javaType="User"
+			select="findById">
+		</association>
+	</resultMap>
+	<select id="selectAddress" resultMap="UAMapBySubMap">
+		select * from tbl_address;
+	</select>
+	
 
 	<!-- 多构造函数选择 -->
 	<resultMap id="UAMapByConstrator" type="Address">
@@ -47,19 +62,7 @@
 		on tbl_user.id=tbl_address.user_id;
 	</select>
 
-	<!-- 调用其他函数 -->
-	<resultMap id="UAMapBySubMap" type="Address">
-		<id property="id" column="id" />
-		<result property="city" column="city" />
-		<result property="country" column="country" />
-		<result property="money" column="money" />
-		<association property="user" column="user_id" javaType="User"
-			select="findById">
-		</association>
-	</resultMap>
-	<select id="selectAddress" resultMap="UAMapBySubMap">
-		select * from tbl_address;
-	</select>
+
 
 	<!-- 连接二次筛选 -->
 	<resultMap id="UAMap1" type="Address">

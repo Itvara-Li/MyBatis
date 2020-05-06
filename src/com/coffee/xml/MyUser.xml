@@ -16,6 +16,7 @@
 		(name,password,email) values
 		(#{name},#{password},#{email})
 	</insert>
+	
 	<update id="updateUser" parameterType="User">
 		update tbl_user set
 		name=#{name},
@@ -24,9 +25,11 @@
 		WHERE id =
 		#{id,jdbcType=INTEGER}
 	</update>
+	
 	<delete id="deleteUser" parameterType="int">
 		delete from tbl_user where id=#{id}
 	</delete>
+	
 	<select id="loginSelect" resultType="User" parameterType="hashmap">
 		select
 		* from tbl_user where name=#{userName} and password=#{password}
@@ -50,6 +53,7 @@
 		select id, name, password from tbl_user
 	</select>
 
+
 	<!-- user和visit表内连接查询 -->
 	<resultMap id="visitMap" type="User">
 		<id property="id" column="id" />
@@ -67,6 +71,8 @@
 		select * from tbl_user INNER
 		JOIN tbl_visit on tbl_user.id=tbl_visit.user_id
 	</select>
+
+
 
 	<!-- choose -->
 	<select id="selectUserChoose" resultType="User" parameterType="User">
@@ -119,6 +125,7 @@
 				password=#{password},
 			</if>
 		</trim>
+		<!-- update tbl_user set name = #{name} and password=#{password} and  where id = #{id}-->
 	</update>
 
 	<!-- foreach 循环查询 -->
@@ -132,11 +139,11 @@
 			</foreach>
 		</where>
 	</select>
-
+<!--select * from tbl_user where id in (2,8,9)  -->
 
 	<!-- foreach 循环赋值 -->
 	<insert id="insertUserForeach">
-		insert into tbl_user (name, password,email) values
+		insert into tbl_user (name, password,email) values 
 		<foreach item="item" index="key" collection="list" open=""
 			separator="," close="">(#{item.name}, #{item.password}, #{item.email})
 		</foreach>
